@@ -73,6 +73,12 @@ function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp 
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
 
+function tokenToEthTransferInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline, address recipient) public returns(uint256(wei)) {
+    assert(recipient != this && recipient != address(0));
+
+    return this.tokenToEthInput(tokensSold, minEth, deadline, msg.sender, recipient)
+}
+
 function tokenToEthOutput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, address buyer, address recipient) private pure returns(uint256) {
     assert(deadline >= block.timestamp && ethBought > 0);
     uint256 tokenReserve = this.token.balances(this)
