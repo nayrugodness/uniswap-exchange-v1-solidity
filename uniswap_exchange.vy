@@ -35,8 +35,15 @@ RemoveLiquidity: event(
     eth_amount: indexed(uint256(wei)),
      token_amount: indexed(uint256)}
      )
-Transfer: event({_from: indexed(address), _to: indexed(address), _value: uint256})
-Approval: event({_owner: indexed(address), _spender: indexed(address), _value: uint256})
+Transfer: event(
+    {_from: indexed(address),
+     _to: indexed(address),
+      _value: uint256}
+      )
+Approval: event(
+    {_owner: indexed(address),
+     _spender: indexed(address),
+      _value: uint256})
 
 name: public(bytes32)                             # Uniswap V1
 symbol: public(bytes32)                           # UNI-V1

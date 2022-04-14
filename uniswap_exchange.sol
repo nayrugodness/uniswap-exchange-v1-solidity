@@ -46,3 +46,15 @@ event RemoveLiquidity(
     uint256(wei) indexed ethAmount,
     uint256 indexed tokenAmount
 );
+
+event Transfer(
+    address indexed from,
+    address indexed to,
+    uint256 value
+);
+
+event Approval(
+    address indexed owner,
+    address indexed spender,
+    uint256 value
+);
