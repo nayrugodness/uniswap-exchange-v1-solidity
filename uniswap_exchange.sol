@@ -72,3 +72,15 @@ factory = Factory
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
+
+function tokenToEthOutput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, address buyer, address recipient) private pure returns(uint256) {
+    assert(deadline >= block.timestamp && ethBought > 0);
+    uint256 tokenReserve = this.token.balances(this)
+    uint256 tokensSold = this.getOutputPrice(asUnitlessNumber(ethBought), tokenReserve, asUnitlessNumber(this.balances));
+    assert( maxTokens >= tokensSold);
+    send(recipient, ethBought)
+    assert(this.token.transfer(buyer, this, tokensSold));
+    EthPurchase(buyer, tokensSold, ethBought).log();
+
+    return uint256(tokensSold);
+}
