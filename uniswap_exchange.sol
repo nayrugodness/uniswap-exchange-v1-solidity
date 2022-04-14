@@ -5,13 +5,13 @@
 
 pragma solidity >=0.5.0 <0.9.0;
 
-contract factory {
+contract Factory {
         
     function getExchange(address tokenAddr) public pure returns (address) {
         return address(tokenAddr);
     }
 }
-contract exchange {
+contract Exchange {
     function getEthToTokenOutputPrice(uint256 tokensBought) public pure returns (uint256) {
         return uint256(wei);
     }
@@ -58,3 +58,12 @@ event Approval(
     address indexed spender,
     uint256 value
 );
+
+
+bytes32 public name;
+bytes32 public symbol;
+uint256 public decimals;
+uint256 public totalSupply;
+uint256[address] balances;
+(uint256[address])[address] allowances;
+address(erc20) token;
