@@ -78,6 +78,32 @@ function setup(address tokenAddr) public pure {
     this.decimals = 18;
 }
 
+function addLiquidity(uint256 minLiquidity, uint256 maxTokens, timestamp deadline) public payable returns(uint256) {
+    assert(deadline > block.timestamp && (maxTokens > 0 && msg.value > 0));
+    uint256 totalLiquidity = this.totalSupply
+    if (totalLiquidity > 0) {
+        assert(minLiquidity > 0);
+        uint256(wei) ethReserve = this.balance - msg.value;
+        uint256 tokenReserve = this.token.balances(this)
+        uint256 tokenAmount = msg.value * tokenReserve / ethReserve + 1
+        uint256 liquidityMinted = msg.value * totalLiquidity / ethReserve
+        
+        assert(maxTokens >= tokenAmount && liquidityMinted >= minLiquidity);
+        this.balances[msg.sender] += liquidityMinted
+        this.totalSupply = totalLiquidity + liquidityMinted
+
+        assert(this.token.transferFrom(msg.sender, this, tokenAmount));
+
+        addLiquidity(msg.sender, msg.value, tokenAmount).log()
+        transfer(address(0), msg.sender, liquidityMinted)
+
+        return uint256(liquidityMinted);
+
+    } else {
+        
+    }
+}
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
