@@ -69,3 +69,6 @@ uint256[address] balances;
 address(erc20) token;
 factory = Factory
 
+function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
+    return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
+}
