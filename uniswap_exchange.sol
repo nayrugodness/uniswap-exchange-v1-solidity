@@ -69,6 +69,15 @@ uint256[address] balances;
 address(erc20) token;
 factory = Factory
 
+function setup(address tokenAddr) public pure {
+    assert(this.factory == address(0) && this.token == address(0) and tokenAddr != address(0));
+    this.factory = msg.sender;
+    this.token = tokenAddr;
+    this.name = 0x556e697377617020563100000000000000000000000000000000000000000000
+    this.symbol = 0x554e492d56310000000000000000000000000000000000000000000000000000
+    this.decimals = 18;
+}
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
