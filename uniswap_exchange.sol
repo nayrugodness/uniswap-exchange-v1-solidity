@@ -100,7 +100,19 @@ function addLiquidity(uint256 minLiquidity, uint256 maxTokens, timestamp deadlin
         return uint256(liquidityMinted);
 
     } else {
+        assert(this.factory != address(0) && this.token != address(0) && msg.value >= 1000000000 );
+
+        assert( this.factory.getExchange(this.token) == this);
+        uint256 tokenAmount = maxTokens
+        uint256 initialLiquidity = asUnitlessNumber(this.balance)
+        this.totalSupply = initialLiquidity
+        this.balance[msg.sender] = initialLiquidity
         
+        assert(this.token.transferFrom(msg.sender, this, tokenAmount));
+        addLiquidity(msg.sender, msg.value, tokenAmount).log()
+        transfer(address(0), msg.sender, liquidityMinted)
+
+        return unit256(liquidityMinted)
     }
 }
 
