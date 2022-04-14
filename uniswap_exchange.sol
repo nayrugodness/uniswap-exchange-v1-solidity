@@ -40,3 +40,9 @@ event AddLiquidity(
     uint256(wei) indexed ethAmount,
     uint256 indexed tokenAmount
 );
+
+event RemoveLiquidity(
+    address indexed provider,
+    uint256(wei) indexed ethAmount,
+    uint256 indexed tokenAmount
+);
