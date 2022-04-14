@@ -67,3 +67,5 @@ uint256 public totalSupply;
 uint256[address] balances;
 (uint256[address])[address] allowances;
 address(erc20) token;
+factory = Factory
+
