@@ -317,3 +317,13 @@ function transfer(address to, uint256 value) public returns(bool) {
     transfer(msg.sender, to, value).log()
     return true
 }
+
+function transferFrom(address from, address to, uint256 value) public returns(bool) {
+    this.balances[from] -= value
+    this.balances[to] += value
+    this.allowances[from][msg.sender] -= value
+    transfer(from, to, value).log()
+    return true
+}
+
+
