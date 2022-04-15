@@ -235,3 +235,18 @@ function tokenToTokenTransferInput(uint256 tokensSold, uint256 minTokensBought, 
     return this.tokenToTokenInput(tokensSold, minTokensBought, minEthBought, deadline, msg.sender, recipient, exchangeAddr)
 }
 
+function tokenToTokenOutput(uint256 tokensBought, uint256(wei) maxTokensSold, timestamp deadline, address buyer, address recipient, address exchangeAddr ) private returns(uint256) {
+    assert(deadline >= block.timestamp && (tokensBought > 0 && maxEthSold > 0));
+    assert(exchangeAddr != this && exchangeAddr != address(0));
+    uint256(wei) ethBought = Exchange(exchangeAddr).getEthToTokenOutputPrice(tokensBought)
+    uint256 tokenReserve = this.token.balanceOf(this)
+    uint256 tokensSold = this.getOutputPrice(asUnitlessNumber(ethBought))
+
+    // tokens sold always is > 0
+
+    assert(maxTokensSold >= tokensSold && maxEthSold >= ethBought);
+    assert(this.token.transferFrom(buyer, this, tokensSold));
+    uint256(wei) ethSold = Exchange(exchangeAddr).ethToTokenTransferOutput(tokensBought, deadline, recipient, value = ethBought)
+    ethPurchase(buyer, tokensSold, ethBought).log()
+    return tokensSold
+}
