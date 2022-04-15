@@ -326,4 +326,8 @@ function transferFrom(address from, address to, uint256 value) public returns(bo
     return true
 }
 
-
+function approve(address spender, uint256 value) public returns(bool) {
+    this.allowances[msg.sender][spender] = value
+    approval(msg.sender, spender, value).log()
+    return true
+}
