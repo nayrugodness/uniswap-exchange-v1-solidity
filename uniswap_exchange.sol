@@ -201,3 +201,7 @@ function tokenToEthOutput(uint256(wei) ethBought, uint256 maxTokens, timestamp d
 
     return uint256(tokensSold);
 }
+
+function ethToTokenSwapOutput(uint256 tokensBought, timestamp deadline) public payable returns(uint256(wei)) {
+    return this.ethToTokenOutput(tokensBought, msg.value, deadline, msg.sender, msg.sender)
+}
