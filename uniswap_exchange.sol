@@ -153,6 +153,10 @@ function ethToTokenInput(uint256(wei) ethSold, uint256 minTokens, timestamp dead
     return tokensBought
 }
 
+function default public payable {
+    this.ethToTokenInput(msg.value, 1, block.timestamp, msg.sender, msg.sender)
+}
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
