@@ -206,6 +206,11 @@ function ethToTokenSwapOutput(uint256 tokensBought, timestamp deadline) public p
     return this.ethToTokenOutput(tokensBought, msg.value, deadline, msg.sender, msg.sender)
 }
 
+function tokenToEthTransferOutput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, address recipient) public returns(uint256) {
+    assert(recipient != this && recipient != address(0));
+    return this.tokenToEthOutput(ethBought, maxTokens, deadline, msg.sender, recipient)
+}
+
 function tokenToTokenInput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, adddress recipient) private returns(uint256) {
     assert(deadline >= block.timestamp && tokensSold > 0) && (minTokensBought > 0 && minEthBought > 0);
     assert(exchangeAddr != this && exchangeAddr != address(0));
