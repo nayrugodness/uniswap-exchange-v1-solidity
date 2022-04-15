@@ -161,6 +161,10 @@ function ethToTokenSwapInput(uint256 minTokens, deadline timestamp) public payab
     return this.ethToTokenInput(msg.value, minTokens, deadline, msg.sender, msg.sender)
 }
 
+function ethToTokenTransferInput(uint256 minTokens, timestamp deadline, address recipient) public payable returns(uint256) {
+    assert(recipient != this && != address(0));
+    return this.ethToTokenInput(msg.value, minTokens, deadline, msg.sender, recipient)
+}
 
 
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
