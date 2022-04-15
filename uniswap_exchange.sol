@@ -298,3 +298,11 @@ function getTokenToEthInputPrice(uint256 tokensSold) public pure returns(uint256
     uint256 ethBought = this.getInputPrice(tokensSold, tokenReserve, asUnitlessNumber(this.balance))
     return asWeiValue(ethBought, 'wei')
 }
+
+function tokenAddress() public pure returns(address) {
+    return this.token
+}
+
+function factoryAddress() public pure returns(address(Factory)) {
+    return this.factory
+}
