@@ -167,6 +167,19 @@ function ethToTokenTransferInput(uint256 minTokens, timestamp deadline, address 
 }
 
 
+function ethToTokenOutput(uint256 tokensBought, uint256(wei) maxEth, timestamp deadline, address buyer, address recipient) private returns(uint256(wei)) {
+    assert(deadline >= block.timestamp && (tokensBought > 0 && maxEth > 0));
+    uint256 tokenReserve = this.token.balanceOf(this)
+    uint256 ethSold = this.getOutputPrice(tokenBought, asUnitlessNumber(this.balance -maxEth), tokenReserve)
+    uint256 ethRefund = maxEth - asWeiValue(ethSold, 'wei')
+    if (ethRefund > 0) {
+        send(buyer, ethRefund)
+    assert(this.token.transfer(recipient, tokensBought))
+    tokenPurchase(buyer, asWeiValue(ethSold, 'wei'), tokensBought).log()
+    return asWeiValue(ethSold, 'wei')
+
+}
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
