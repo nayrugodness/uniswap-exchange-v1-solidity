@@ -306,3 +306,7 @@ function tokenAddress() public pure returns(address) {
 function factoryAddress() public pure returns(address(Factory)) {
     return this.factory
 }
+
+function balanceOf(address owner) public pure returns(uint256) {
+    return this.balances[owner]
+}
