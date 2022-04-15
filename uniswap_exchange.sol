@@ -274,3 +274,8 @@ function tokenToExchangeSwapOutput(uint256 tokensBought, uint256 maxTokensSold, 
     return this.tokenToTokenOutput(tokensBought, maxTokensSold, maxEthSold, deadline, msg.sender, msg.sender, exchangeAddr)
 }
 
+function tokenToExchangeTransferOutput(uint256 tokensBought, uint256 maxTokensSold, uint256(wei) maxEthSold, timestamp deadline, address recipient, address exchangeAddr) public return(uint256) {
+    assert(recipient != this);
+    return this.tokenToTokenOutput(tokensBought, maxTokensSold, maxEthSold, deadline, msd.sender, recipient, exchangeAddr)
+}
+
