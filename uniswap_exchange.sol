@@ -142,6 +142,17 @@ function getInputPrice(uint256 inputAmount, uint256 inputReserve, uint256 output
     return numerator / denominator
 }
 
+function ethToTokenInput(uint256(wei) ethSold, uint256 minTokens, timestamp deadline, address buyer, address recipient) private pure returns() {
+    assert(deadline >= block.timestamp && (ethSold > 0 minTokens > 0));
+    uint256 tokenReserve = this.token.balanceOf(this)
+    uint256 tokensBought = this.getInputPrice(asUnitlessNumber(ethSold), asUnitlessNumber(this.balance - ethSold), tokenReserve)
+
+    assert(tokensBought >= minTokens);
+    assert(this.token.transfer(recipient, tokensBought))
+    tokenPurchase(buyer, ethSold, tokensBought).log()
+    return tokensBought
+}
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
