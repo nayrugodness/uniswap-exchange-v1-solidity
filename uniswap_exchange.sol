@@ -279,3 +279,10 @@ function tokenToExchangeTransferOutput(uint256 tokensBought, uint256 maxTokensSo
     return this.tokenToTokenOutput(tokensBought, maxTokensSold, maxEthSold, deadline, msd.sender, recipient, exchangeAddr)
 }
 
+function getEthToTokenInputPrice(uint256(wei) ethSold) public pure returns(uint256) {
+    assert(ethSold > 0);
+    uint256 tokenReserve = this.token.balanceOf(this)
+    return this.getInputprice(asUnitlessNumber(ethSold), asUnitlessNumber(this.balance), tokenReserve)
+}
+
+
