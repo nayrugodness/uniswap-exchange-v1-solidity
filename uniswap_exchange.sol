@@ -225,3 +225,7 @@ function tokenToTokenInput(uint256(wei) ethBought, uint256 maxTokens, timestamp 
     return tokensBought
 }
 
+function tokenToTokenSwapInput(uint256 tokensSold, uint256 minTokensBought, uint256(wei) minEthBought, timestamp deadline, address tokenAddr ) public returns(uint256) {
+    address exchangeAddr = this.factory.getExchange(tokenAddr)
+    return this.tokenToTokenInput(tokensSold, minTokensBought, minEthBought, deadline, msg.sender, msg.sender, exchangeAddr)
+}
