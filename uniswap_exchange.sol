@@ -134,6 +134,13 @@ function removeLiquidity(uint256 amount, uint256(wei) minEth, uint256 minTokens,
     return ethAmount, tokenAmount
 }
 
+function getInputPrice(uint256 inputAmount, uint256 inputReserve, uint256 outputReserve) private pure returns() {
+    assert(inputReserve > 0 && outputReserve > 0);
+    uint256 inputAmountWithFee = inputAmount * 997
+    uint256 numerator = inputAmountWithFee * outputReserve
+    uint256 denominator = (inputReserve * 1000) + inputAmountWithFee
+    return numerator / denominator
+}
 
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
