@@ -157,6 +157,12 @@ function default public payable {
     this.ethToTokenInput(msg.value, 1, block.timestamp, msg.sender, msg.sender)
 }
 
+function ethToTokenSwapInput(uint256 minTokens, deadline timestamp) public payable return(uint256) {
+    return this.ethToTokenInput(msg.value, minTokens, deadline, msg.sender, msg.sender)
+}
+
+
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
