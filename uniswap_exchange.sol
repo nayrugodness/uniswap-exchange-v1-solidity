@@ -250,3 +250,9 @@ function tokenToTokenOutput(uint256 tokensBought, uint256(wei) maxTokensSold, ti
     ethPurchase(buyer, tokensSold, ethBought).log()
     return tokensSold
 }
+
+function tokenToTokenSwapOutput(uint256 tokensBought, uint256 maxTokensSold, uint256(wei) maxEthSold, timestamp deadline, address tokenAddr) public returns(uint256) {
+    address exchangeAddr = this.factory.getExchange(tokenAddr)
+    return this.tokenToTokenOutput(tokensBought, maxTokensSold, maxEthSold, deadline, msg.sender, msg.sender, exchangeAddr)
+}
+
