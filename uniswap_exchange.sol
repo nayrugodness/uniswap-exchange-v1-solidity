@@ -116,6 +116,25 @@ function addLiquidity(uint256 minLiquidity, uint256 maxTokens, timestamp deadlin
     }
 }
 
+function removeLiquidity(uint256 amount, uint256(wei) minEth, uint256 minTokens, timestamp deadline) public returns(){
+    assert(amount > 0 && deadline > block.timestamp && minEth > 0 && minTokens > 0);
+    uint256 totalLiquidity = this.totalSupply
+    assert(totalLiquidity > 0);
+    uint256 tokenReserve = this.tokenBalanceOf(this)
+    uint256(wei) ethAmount = amount *this.balance / totalSupply
+    
+    assert(ethAmount >= minEth && tokenAmount >= minTokens);
+    this.balances[msg.sender] -= amount
+    this.totalSupply = totalLiquidity - amount
+    send(msdg.sender, ethAmount)
+
+    assert(this.token.transfer(msg.sender, tokenAmount));
+    removeLiquidity(msg.sender, ethAmount)
+    transfer(msg.sender, address(0), amount)
+    return ethAmount, tokenAmount
+}
+
+
 function tokenToEthSwapInput(uint256 tokensSold, uint256(wei) minEth, timestamp deadline) public pure returns (uint256(wei)) {
     return tokenToEthInput(tokensSold, minEth, deadline, msg.sender, msg.sender);
 }
