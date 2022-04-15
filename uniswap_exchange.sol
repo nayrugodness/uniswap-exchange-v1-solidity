@@ -310,3 +310,10 @@ function factoryAddress() public pure returns(address(Factory)) {
 function balanceOf(address owner) public pure returns(uint256) {
     return this.balances[owner]
 }
+
+function transfer(address to, uint256 value) public returns(bool) {
+    this.balances[msg.sender] -= value
+    this.balances[to] += value
+    transfer(msg.sender, to, value).log()
+    return true
+}
