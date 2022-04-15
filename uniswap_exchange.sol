@@ -331,3 +331,7 @@ function approve(address spender, uint256 value) public returns(bool) {
     approval(msg.sender, spender, value).log()
     return true
 }
+
+function allowances(address owner, address spender) public pure return(uint256) {
+    return this.allowances[owner][spender]
+}
