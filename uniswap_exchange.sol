@@ -206,7 +206,7 @@ function ethToTokenSwapOutput(uint256 tokensBought, timestamp deadline) public p
     return this.ethToTokenOutput(tokensBought, msg.value, deadline, msg.sender, msg.sender)
 }
 
-function tokenToEthTransferOutput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, adddress recipient) private returns(uint256) {
+function tokenToTokenInput(uint256(wei) ethBought, uint256 maxTokens, timestamp deadline, adddress recipient) private returns(uint256) {
     assert(deadline >= block.timestamp && tokensSold > 0) && (minTokensBought > 0 && minEthBought > 0);
     assert(exchangeAddr != this && exchangeAddr != address(0));
     uint256 tokenReserve = this.token.balanceOf(this)
