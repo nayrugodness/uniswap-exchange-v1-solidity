@@ -210,7 +210,7 @@ def ethToTokenOutput(tokens_bought: uint256, max_eth: uint256(wei), deadline: ti
 # @param deadline Time after which this transaction can no longer be executed.
 # @return Amount of ETH sold.
 
-# @ VOY ACÁ !!!!!!!!!!!!!!!!!!!!!
+
 @public
 @payable
 def ethToTokenSwapOutput(tokens_bought: uint256, deadline: timestamp) -> uint256(wei):
