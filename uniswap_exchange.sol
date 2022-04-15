@@ -285,4 +285,9 @@ function getEthToTokenInputPrice(uint256(wei) ethSold) public pure returns(uint2
     return this.getInputprice(asUnitlessNumber(ethSold), asUnitlessNumber(this.balance), tokenReserve)
 }
 
-
+function getEthToTokenOutputPrice(uint256 tokensBought) public pure returns(uint256(wei)) {
+    assert(tokensBought > 0);
+    uint256 tokenReserve = this.token.balanceOf(this)
+    uint256 ethSold = this.getOuputPrice(tokensBought, asUnitlessNumber(this.balance), tokenReserve)
+    return asWeiValue(ethSold, 'wei')
+}
