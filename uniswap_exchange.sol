@@ -3,7 +3,7 @@
 //notice Use at your own risk
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity >=0.5.0 <0.9.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 contract Factory {
         
@@ -13,13 +13,13 @@ contract Factory {
 }
 contract Exchange {
     function getEthToTokenOutputPrice(uint256 tokensBought) public pure returns (uint256) {
-        return uint256(wei);
+        return uint256;
     }
 
     function ethToTokenTransferInput(uint256 minTokens, address recipient) public pure returns (uint256) {}
 
     function ethToTokenTransferOutput(uint256 tokensBought, address recipient) public pure returns (uint256) {
-        return uint256(wei);
+        return uint256;
     }
 }
 
@@ -102,7 +102,7 @@ function addLiquidity(uint256 minLiquidity, uint256 maxTokens, timestamp deadlin
     } else {
         assert(this.factory != address(0) && this.token != address(0) && msg.value >= 1000000000 );
 
-        assert( this.factory.getExchange(this.token) == this);
+        assert(this.factory.getExchange(this.token) == this);
         uint256 tokenAmount = maxTokens
         uint256 initialLiquidity = asUnitlessNumber(this.balance)
         this.totalSupply = initialLiquidity
@@ -174,6 +174,7 @@ function ethToTokenOutput(uint256 tokensBought, uint256(wei) maxEth, timestamp d
     uint256 ethRefund = maxEth - asWeiValue(ethSold, 'wei')
     if (ethRefund > 0) {
         send(buyer, ethRefund)
+    }
     assert(this.token.transfer(recipient, tokensBought))
     tokenPurchase(buyer, asWeiValue(ethSold, 'wei'), tokensBought).log()
     return asWeiValue(ethSold, 'wei')
